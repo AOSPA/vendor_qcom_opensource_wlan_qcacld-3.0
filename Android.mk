@@ -91,9 +91,6 @@ endif
 endif
 
 ifeq ($(LOCAL_MULTI_KO), true)
-LOCAL_ANDROID_ROOT := $(shell pwd)
-LOCAL_WLAN_BLD_DIR := $(LOCAL_ANDROID_ROOT)/$(WLAN_BLD_DIR)
-$(shell `find $(LOCAL_WLAN_BLD_DIR)/qcacld-3.0/ -maxdepth 1 -name '.*' ! -name '.git' -delete`)
 
 ifeq ($(LOCAL_MODULE_DDK_BUILD), true)
 ifeq ($(CHIPSET),)
@@ -184,8 +181,6 @@ endif
 
 endif
 else
-$(foreach chip, $(TARGET_WLAN_CHIP), \
-	$(shell ln -sf . $(LOCAL_WLAN_BLD_DIR)/qcacld-3.0/.$(chip)))
 include $(foreach chip, $(TARGET_WLAN_CHIP), $(LOCAL_PATH)/.$(chip)/Android.mk)
 endif
 
